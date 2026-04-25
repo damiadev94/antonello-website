@@ -27,6 +27,7 @@
     --max:1440px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  html{overflow-x:hidden}
   html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   body{overflow-x:hidden}
   a{color:inherit;text-decoration:none}
@@ -204,13 +205,6 @@
   }
   .topbar .dot{width:6px;height:6px;background:#5fb36b;display:inline-block}
 
-  /* ——— hero ——— */
-  .hero{
-    position:relative;min-height:max(100vh, 820px);
-    background:var(--dark);color:var(--cream);
-    overflow:hidden;
-    display:flex;flex-direction:column;justify-content:flex-end;
-  }
   /* ——— hero (full-bleed video bg, copy on top) ——— */
   .hero{
     position:relative;min-height:max(100vh, 820px);
@@ -218,22 +212,26 @@
     overflow:hidden;
     display:flex;flex-direction:column;
   }
-  .hero-video, .hero-poster{
+  .hero-video{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;z-index:1;
+    filter:grayscale(.25) contrast(1.05) brightness(.7);
+  }
+  .hero-poster{
     position:absolute;inset:0;width:100%;height:100%;
     object-fit:cover;z-index:0;
-    filter:grayscale(.25) contrast(1.05) brightness(.7);
   }
   .hero-poster{
     background:
       repeating-linear-gradient(135deg, rgba(200,184,154,.08) 0 2px, transparent 2px 18px),
       radial-gradient(ellipse at 35% 40%, #2a3a3d 0%, #1C2B2D 55%, #11191b 100%);
   }
-  .hero-grad{position:absolute;inset:0;z-index:1;pointer-events:none;
+  .hero-grad{position:absolute;inset:0;z-index:2;pointer-events:none;
     background:
       linear-gradient(180deg, rgba(17,25,27,.55) 0%, rgba(17,25,27,.25) 30%, rgba(17,25,27,.4) 60%, rgba(17,25,27,.85) 100%),
       linear-gradient(90deg, rgba(17,25,27,.5) 0%, rgba(17,25,27,0) 55%);
   }
-  .hero-hairlines{position:absolute;inset:0;z-index:1;pointer-events:none}
+  .hero-hairlines{position:absolute;inset:0;z-index:2;pointer-events:none}
   .hero-hairlines::before,
   .hero-hairlines::after{content:"";position:absolute;background:rgba(245,240,232,.06)}
   .hero-hairlines::before{left:33.333%;top:0;bottom:0;width:1px}
@@ -438,7 +436,7 @@
     max-width:var(--max);margin:0 auto;padding:0 48px 40px;
     font-family:var(--display);font-style:italic;font-weight:300;font-variation-settings:"opsz" 144;
     font-size:clamp(80px, 15vw, 240px);line-height:.9;letter-spacing:-.04em;text-transform:none;color:var(--blood);opacity:.18;
-    pointer-events:none;user-select:none;white-space:nowrap;overflow:hidden;
+    pointer-events:none;user-select:none;white-space:nowrap;overflow:hidden;width:100%;
   }
   footer.site .legal{
     max-width:var(--max);margin:0 auto;padding:32px 48px;
@@ -447,11 +445,20 @@
     font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--cream);opacity:.5;text-transform:uppercase;
   }
 
-  /* ——— responsive ——— */
+  /* ——— responsive: tablet ≤1100px ——— */
   @media (max-width:1100px){
+    .wrap{padding-left:40px;padding-right:40px}
+    .hero-top,.hero-main,.hero-foot{padding-left:40px;padding-right:40px}
+    footer.site .top{padding-left:40px;padding-right:40px}
+    footer.site .mega{padding-left:40px;padding-right:40px}
+    footer.site .legal{padding-left:40px;padding-right:40px}
     .rail{grid-template-columns:1fr;gap:40px;padding:100px 0}
     .rail .idx{padding-top:0}
+    .manifesto .rail{padding:120px 0}
+    .tension{padding:100px 40px}
+    .tension .wrap{padding-left:0;padding-right:0}
     .feature{grid-template-columns:1fr}
+    .feature .imgside{min-height:480px}
     .feature .copyside{padding:80px 40px}
     .plans{grid-template-columns:1fr}
     .plan{border-right:0;border-bottom:1px solid var(--line-dark)}
@@ -467,20 +474,85 @@
     footer.site .top{grid-template-columns:1fr 1fr;gap:48px}
     .final .inner{grid-template-columns:1fr;padding:100px 40px}
     .svc-row{grid-template-columns:60px 1fr;gap:16px}
-    .svc-row .desc, .svc-row .tag{grid-column:2;text-align:left}
+    .svc-row .desc,.svc-row .tag{grid-column:2;text-align:left}
+    .svc-row .ar{display:none}
   }
+
+  /* ——— responsive: mobile ≤720px ——— */
   @media (max-width:720px){
-    .wrap, footer.site .top, footer.site .legal{padding-left:24px;padding-right:24px}
-    .hero-top, .hero-main, .hero-foot{padding-left:24px;padding-right:24px}
-    .topbar{padding:14px 20px;grid-template-columns:auto 1fr;gap:16px}
+    .wrap, footer.site .legal{padding-left:24px;padding-right:24px}
+    .topbar{padding:14px 20px;grid-template-columns:auto 1fr;gap:16px;overflow:hidden}
     .topbar .left, .topbar .right .hide-sm{display:none}
     .topbar .mark{justify-self:start}
-    .hero{min-height:auto}
-    .hero-top, .hero-main, .hero-foot{padding-left:24px;padding-right:24px}
-    .hero-top{padding-top:100px}
-    .hero-foot{grid-template-columns:1fr;margin-top:48px;padding-top:32px}
+    .topbar .mark sup, .topbar .mark small{display:none}
+
+    /* hero */
+    .hero{min-height:100svh}
+    .hero-top,.hero-main,.hero-foot{padding-left:24px;padding-right:24px}
+    .hero-top{padding-top:88px}
+    .hero-top .meta{display:none}
+    .hero-foot{grid-template-columns:1fr;margin-top:40px;padding-top:24px;padding-bottom:32px;gap:24px}
     .hero-foot .ctas{justify-self:start}
-    .services-head, .services-foot, .pricing-foot, .process-foot{flex-direction:column;align-items:flex-start}
+
+    /* ticker */
+    .ticker-track{font-size:14px;gap:40px}
+
+    /* sections */
+    .rail{gap:24px;padding:72px 0}
+    .manifesto .rail{padding:80px 0}
+    .manifesto .signature{flex-direction:column;align-items:flex-start;gap:10px}
+    .tension{padding:64px 24px}
+    .tension .wrap{padding-left:0;padding-right:0}
+    .tension .caption{flex-direction:column;gap:20px;align-items:flex-start}
+
+    /* services */
+    .services .rail{padding:72px 0 52px}
+    .services-head{margin-bottom:48px}
+    .svc-row{grid-template-columns:44px 1fr;gap:12px;padding:22px 0}
+    .svc-row .name{font-size:clamp(22px,6.5vw,32px)}
+    .svc-row .desc{font-size:13px;max-width:none}
+
+    /* feature strip */
+    .feature .imgside{min-height:280px}
+    .feature .copyside{padding:48px 24px}
+
+    /* pricing */
+    .pricing .rail{padding:72px 0}
+    .pricing-head{margin-bottom:40px}
+    .plan .price{font-size:56px}
+
+    /* process */
+    .process .rail{padding:72px 0}
+    .process-head{margin-bottom:52px}
+    .process-grid{grid-template-columns:1fr}
+    .step:nth-child(odd){padding-right:0;border-right:0}
+    .step{border-bottom:1px solid var(--line-dark);padding:32px 0}
+    .step:last-child{border-bottom:0}
+    .process-foot{flex-direction:column;gap:8px}
+
+    /* trust */
+    .trust .rail{padding:72px 0}
+    .trust-head{margin-bottom:52px}
+    .trust-grid{grid-template-columns:1fr}
+    .pillar:nth-child(odd){padding-right:0;border-right:0}
+    .pillar{padding:32px 0}
+    .pillar:last-child{border-bottom:0}
+
+    /* final cta */
+    .final .inner{padding:72px 24px}
+    .final .inner .main .h-display{font-size:clamp(40px,10vw,72px)}
+    .final .inner .main .ctas{flex-direction:column;align-items:flex-start;gap:12px}
+    .final .inner .main .meta{grid-template-columns:1fr;gap:10px}
+
+    /* footer */
+    footer.site .top{grid-template-columns:1fr;padding:64px 24px 40px;gap:40px}
+    footer.site .mega{padding:0 24px 24px;overflow:hidden}
+    footer.site .legal{padding:20px 24px;flex-direction:column;gap:10px}
+    footer.site .subscribe{max-width:100%}
+
+    /* misc */
+    .services-head,.services-foot,.pricing-foot,.process-foot{flex-direction:column;align-items:flex-start}
+    .wa-float{bottom:16px;right:16px;padding:12px 14px;font-size:10px}
   }
 </style>
 </head>
@@ -503,7 +575,7 @@
 <!-- ═══════════════ HERO ═══════════════ -->
 <header class="hero">
   <video class="hero-video" autoplay muted loop playsinline poster="images/dr-antonello.jpg" id="hero-video">
-    <source src="uploads/video-3-compressed.mp4" type="video/mp4"/>
+    <source src="images/video-hero-1.mp4" type="video/mp4"/>
   </video>
   <div class="hero-poster"></div>
   <div class="hero-grad"></div>
@@ -511,7 +583,7 @@
 
   <div class="hero-top">
     <div>
-      <span class="eyebrow">Escazú · San José, Costa Rica</span>
+      <span class="cream">Escazú · San José, Costa Rica</span>
       <div class="num" style="margin-top:10px">— Colegiados CPPCR · Atención privada</div>
     </div>
     <div class="meta">
