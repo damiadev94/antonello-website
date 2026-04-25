@@ -1,0 +1,19 @@
+# Videos pesados — subir a Vercel por drag-and-drop o Vercel CLI, no por git
+uploads/video-1.mp4
+uploads/video-2.mp4
+uploads/video-3.mp4
+uploads/video-4.mp4
+
+# El video del hero SÍ se incluye (0.83 MB, dentro del límite)
+# !uploads/video-3-compressed.mp4
+
+# Archivos de referencia / moodboard (no van a producción)
+uploads/DS3-2.jpg
+uploads/screencapture-colnago-it-it-2026-04-23-13_30_09.pdf
+
+# Scratch
+video-preview.html
+
+# Sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Neural Global Consulting Group — Sexología y Salud Mental · Escazú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Narrow:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --dark:#1C2B2D;
+    --dark-2:#162224;
+    --cream:#F5F0E8;
+    --cream-2:#EDE6DA;
+    --sand:#C8B89A;
+    --line:rgba(200,184,154,.22);
+    --line-dark:rgba(28,43,45,.14);
+    --ink:#1C2B2D;
+    --display:"Archivo Narrow","Archivo",system-ui,sans-serif;
+    --sans:"Archivo",system-ui,-apple-system,sans-serif;
+    --serif:"Cormorant Garamond", Georgia, serif;
+    --mono:"JetBrains Mono", ui-monospace, monospace;
+    --max:1440px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+  img,svg{display:block;max-width:100%}
+
+  /* ——— typography ——— */
+  .eyebrow{
+    font-family:var(--sans);font-weight:500;
+    font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--sand);
+  }
+  .eyebrow.on-light{color:#8a7a5e}
+  .num{
+    font-family:var(--mono);font-weight:400;
+    font-size:10.5px;letter-spacing:.14em;color:var(--sand);
+  }
+  .num.on-light{color:#8a7a5e}
+  .h-mega{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(56px, 9.2vw, 168px);
+    line-height:.92;letter-spacing:-.02em;
+    text-transform:uppercase;
+  }
+  .h-display{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(48px, 6.4vw, 108px);
+    line-height:.95;letter-spacing:-.015em;
+    text-transform:uppercase;
+  }
+  .h-section{
+    font-family:var(--display);font-weight:500;
+    font-size:clamp(36px, 4.4vw, 72px);
+    line-height:1.0;letter-spacing:-.01em;
+    text-transform:uppercase;
+  }
+  .h-card{
+    font-family:var(--display);font-weight:500;
+    font-size:28px;line-height:1.05;
+    text-transform:uppercase;letter-spacing:-.005em;
+  }
+  .italic-label{font-family:var(--serif);font-style:italic;font-weight:300;text-transform:none;letter-spacing:0;color:var(--sand)}
+  .lede{font-family:var(--sans);font-weight:300;font-size:15px;line-height:1.65}
+  .body-sm{font-family:var(--sans);font-weight:300;font-size:13.5px;line-height:1.6}
+
+  /* ——— arrow link ——— */
+  .arrow-link{
+    display:inline-flex;align-items:center;gap:14px;
+    font-family:var(--sans);font-weight:500;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    padding:14px 0;
+    border-bottom:1px solid currentColor;
+    transition:gap .25s ease;
+  }
+  .arrow-link:hover{gap:20px}
+  .arrow-link .ar{display:inline-block;transform:translateY(-1px)}
+
+  /* ——— buttons (square, hairline) ——— */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:12px;
+    height:48px;padding:0 24px;border-radius:0;
+    font-family:var(--sans);font-weight:500;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    border:1px solid currentColor;
+    transition:background .25s ease, color .25s ease;
+  }
+  .btn-solid-cream{background:var(--cream);color:var(--dark);border-color:var(--cream)}
+  .btn-solid-cream:hover{background:transparent;color:var(--cream);border-color:var(--cream)}
+  .btn-ghost-cream{color:var(--cream);border-color:var(--cream)}
+  .btn-ghost-cream:hover{background:var(--cream);color:var(--dark)}
+  .btn-solid-dark{background:var(--dark);color:var(--cream);border-color:var(--dark)}
+  .btn-solid-dark:hover{background:transparent;color:var(--dark)}
+  .btn-ghost-dark{color:var(--dark);border-color:var(--dark)}
+  .btn-ghost-dark:hover{background:var(--dark);color:var(--cream)}
+
+  /* ——— layout shells ——— */
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 48px}
+  section{padding:0}
+  .on-dark{background:var(--dark);color:var(--cream)}
+  .on-dark .eyebrow{color:var(--sand)}
+
+  /* left-rail grid — Colnago signature: index number left, content right */
+  .rail{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:64px;
+    padding:140px 0 140px;
+    border-top:1px solid var(--line-dark);
+  }
+  .on-dark .rail{border-top-color:var(--line)}
+  .rail .idx{
+    font-family:var(--mono);font-weight:400;font-size:11px;
+    letter-spacing:.2em;color:var(--sand);
+    padding-top:6px;
+  }
+  .rail .idx .dash{display:inline-block;width:18px;height:1px;background:var(--sand);vertical-align:middle;margin-right:10px;transform:translateY(-3px)}
+
+  /* ——— top bar ——— */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:18px 32px;
+    color:var(--cream);mix-blend-mode:difference;
+    font-family:var(--sans);
+    transition:padding .3s ease;
+  }
+  .topbar.solid{mix-blend-mode:normal;background:var(--dark);padding:14px 32px;border-bottom:1px solid var(--line);color:var(--cream)}
+  .topbar .left{display:flex;align-items:center;gap:28px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+  .topbar .mark{
+    font-family:var(--display);font-weight:700;letter-spacing:.02em;
+    font-size:15px;text-transform:uppercase;white-space:nowrap;
+    justify-self:center;
+  }
+  .topbar .mark sup{font-family:var(--serif);font-style:italic;font-weight:300;font-size:10px;margin-left:6px;letter-spacing:0;text-transform:none;vertical-align:top;color:var(--sand)}
+  .topbar .mark small{display:block;font-family:var(--sans);font-weight:400;font-size:8.5px;letter-spacing:.28em;color:var(--sand);margin-top:3px;text-transform:uppercase}
+
+  /* ——— floating whatsapp ——— */
+  .wa-float{
+    position:fixed;bottom:24px;right:24px;z-index:55;
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--dark);color:var(--cream);
+    border:1px solid var(--sand);
+    padding:14px 18px;
+    font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    transition:background .25s ease, color .25s ease;
+  }
+  .wa-float:hover{background:var(--sand);color:var(--dark)}
+  .wa-float .wa-dot{width:7px;height:7px;background:#5fb36b;display:inline-block;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .topbar .right{display:flex;align-items:center;gap:28px;justify-self:end;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+  .topbar a:hover{opacity:.7}
+  .topbar .pill{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:10px 18px;border:1px solid currentColor;
+    font-weight:500;
+  }
+  .topbar .dot{width:6px;height:6px;background:#5fb36b;display:inline-block}
+
+  /* ——— hero ——— */
+  .hero{
+    position:relative;min-height:max(100vh, 820px);
+    background:var(--dark);color:var(--cream);
+    overflow:hidden;
+    display:flex;flex-direction:column;justify-content:flex-end;
+  }
+  /* ——— hero (full-bleed video bg, copy on top) ——— */
+  .hero{
+    position:relative;min-height:max(100vh, 820px);
+    background:var(--dark);color:var(--cream);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .hero-video, .hero-poster{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;z-index:0;
+    filter:grayscale(.25) contrast(1.05) brightness(.7);
+  }
+  .hero-poster{
+    background:
+      repeating-linear-gradient(135deg, rgba(200,184,154,.08) 0 2px, transparent 2px 18px),
+      radial-gradient(ellipse at 35% 40%, #2a3a3d 0%, #1C2B2D 55%, #11191b 100%);
+  }
+  .hero-grad{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(17,25,27,.55) 0%, rgba(17,25,27,.25) 30%, rgba(17,25,27,.4) 60%, rgba(17,25,27,.85) 100%),
+      linear-gradient(90deg, rgba(17,25,27,.5) 0%, rgba(17,25,27,0) 55%);
+  }
+  .hero-hairlines{position:absolute;inset:0;z-index:1;pointer-events:none}
+  .hero-hairlines::before,
+  .hero-hairlines::after{content:"";position:absolute;background:rgba(245,240,232,.06)}
+  .hero-hairlines::before{left:33.333%;top:0;bottom:0;width:1px}
+  .hero-hairlines::after{right:33.333%;top:0;bottom:0;width:1px}
+
+  .hero-top{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:120px 48px 0}
+  .hero-top .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--sand);line-height:1.8;text-align:right}
+  .hero-top .meta span{display:block}
+
+  .hero-main{position:relative;z-index:3;padding:80px 48px 0;margin-top:auto}
+  .hero-main .h-mega{color:var(--cream);font-size:clamp(48px, 8vw, 140px);text-shadow:0 2px 24px rgba(17,25,27,.4)}
+  .hero-main .h-mega em{font-family:var(--serif);font-style:italic;font-weight:300;text-transform:none;color:var(--sand);letter-spacing:0;font-size:.5em;vertical-align:baseline;display:inline-block;margin-right:.2em}
+
+  .hero-foot{position:relative;z-index:3;padding:60px 48px 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;align-items:end;border-top:1px solid var(--line);margin-top:80px}
+  .hero-foot .col h4{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--sand);margin-bottom:14px;font-weight:400}
+  .hero-foot .col p{font-size:13.5px;line-height:1.65;color:var(--cream);opacity:.92;max-width:340px;font-weight:300}
+  .hero-foot .ctas{display:flex;gap:10px;flex-wrap:wrap;justify-self:end}
+
+  /* ——— marquee / ticker ——— */
+  .ticker{
+    background:var(--dark);color:var(--cream);
+    border-top:1px solid var(--line);
+    overflow:hidden;
+    padding:22px 0;
+  }
+  .ticker-track{
+    display:flex;gap:64px;white-space:nowrap;
+    animation:ticker 48s linear infinite;
+    font-family:var(--display);font-weight:500;
+    font-size:18px;text-transform:uppercase;letter-spacing:.06em;
+  }
+  .ticker-track span{display:inline-flex;align-items:center;gap:64px}
+  .ticker-track em{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--sand);text-transform:none;letter-spacing:0}
+  .ticker-track .sep{color:var(--sand);font-weight:300}
+  @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ——— manifesto ——— */
+  .manifesto{background:var(--cream);color:var(--ink);padding-bottom:20px}
+  .manifesto .rail{padding:180px 0 180px}
+  .manifesto .h-section{max-width:16ch}
+  .manifesto .lede{margin-top:48px;max-width:58ch;color:#3a4a4c}
+  .manifesto .signature{margin-top:60px;display:flex;align-items:center;gap:20px}
+  .manifesto .signature .italic-label{color:#8a7a5e;font-size:22px;font-style:italic}
+  .manifesto .signature .line{flex:1;height:1px;background:var(--line-dark);max-width:200px}
+
+  /* ——— services — index table (Colnago product index DNA) ——— */
+  .services{background:var(--dark);color:var(--cream)}
+  .services .rail{padding:160px 0 80px}
+  .services-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:100px}
+  .services-head .h-section{max-width:18ch}
+  .services-head .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--sand);text-align:right;line-height:1.7}
+
+  .svc-index{border-top:1px solid var(--line)}
+  .svc-row{
+    display:grid;grid-template-columns:80px 1.2fr 2fr 80px;
+    gap:32px;align-items:center;
+    padding:36px 0;
+    border-bottom:1px solid var(--line);
+    transition:padding .35s ease, background .35s ease;
+    position:relative;
+  }
+  .svc-row:hover{padding-left:16px;background:rgba(245,240,232,.02)}
+  .svc-row .num-big{font-family:var(--mono);font-weight:400;font-size:13px;letter-spacing:.18em;color:var(--sand)}
+  .svc-row .name{font-family:var(--display);font-weight:500;font-size:clamp(28px, 3.2vw, 44px);line-height:1;text-transform:uppercase;letter-spacing:-.01em}
+  .svc-row .desc{font-size:14px;line-height:1.6;color:var(--cream);opacity:.7;max-width:52ch}
+  .svc-row .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);text-align:right}
+  .svc-row .ar{position:absolute;right:-6px;top:50%;transform:translateY(-50%) translateX(-10px);opacity:0;transition:opacity .3s ease, transform .3s ease;color:var(--sand)}
+  .svc-row:hover .ar{opacity:1;transform:translateY(-50%) translateX(0)}
+
+  .services-foot{margin-top:80px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-bottom:40px}
+  .services-foot .fine{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--sand);opacity:.7;text-transform:uppercase}
+
+  /* ——— feature strip (big image left, copy right) ——— */
+  .feature{display:grid;grid-template-columns:1.15fr 1fr;min-height:720px;background:var(--cream)}
+  .feature .imgside{position:relative;overflow:hidden;background:var(--dark)}
+  .feature .imgside .ph{
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(135deg, rgba(200,184,154,.14) 0 2px, transparent 2px 16px),
+      linear-gradient(160deg, #3a3226 0%, #2a2419 55%, #1C1A15 100%);
+  }
+  .feature .imgside .phcap{
+    position:absolute;left:32px;bottom:28px;z-index:2;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+    color:var(--sand);opacity:.8;text-transform:uppercase;
+  }
+  .feature .imgside .phcap em{display:block;color:var(--cream);opacity:.55;font-style:normal;margin-top:6px;font-size:9.5px}
+  .feature .imgside .corner{
+    position:absolute;top:32px;right:32px;z-index:2;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cream);opacity:.8;text-transform:uppercase;
+  }
+  .feature .copyside{padding:120px 80px;display:flex;flex-direction:column;justify-content:center;gap:36px}
+  .feature .copyside .h-section{max-width:14ch}
+  .feature .copyside .lede{max-width:46ch;color:#3a4a4c}
+  .feature .copyside .arrow-link{color:var(--dark);align-self:flex-start}
+
+  /* ——— pricing ——— */
+  .pricing{background:var(--cream-2)}
+  .pricing .rail{padding:160px 0}
+  .pricing-head{margin-bottom:80px;max-width:720px}
+  .pricing-head .h-section{margin-top:24px}
+  .pricing-head .lede{margin-top:32px;max-width:52ch;color:#3a4a4c}
+
+  .plans{display:grid;grid-template-columns:repeat(3, 1fr);border:1px solid var(--line-dark);background:var(--cream)}
+  .plan{
+    padding:40px 36px 36px;
+    border-right:1px solid var(--line-dark);
+    display:flex;flex-direction:column;gap:20px;
+    position:relative;
+    transition:background .3s ease;
+    min-height:420px;
+  }
+  .plan:last-child{border-right:0}
+  .plan:hover{background:var(--cream-2)}
+  .plan .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:#8a7a5e;text-transform:uppercase}
+  .plan .name{font-family:var(--display);font-weight:500;font-size:24px;text-transform:uppercase;line-height:1.05;letter-spacing:-.005em}
+  .plan .price{font-family:var(--display);font-weight:600;font-size:64px;line-height:1;letter-spacing:-.02em;margin-top:auto}
+  .plan .price sub{font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.18em;color:#8a7a5e;vertical-align:super;margin-left:8px;text-transform:uppercase}
+  .plan .per{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:#8a7a5e;text-transform:uppercase;margin-top:6px}
+  .plan .desc{font-size:13.5px;line-height:1.6;color:#3a4a4c;font-weight:300;margin-top:8px;border-top:1px solid var(--line-dark);padding-top:20px;max-width:32ch}
+  .plan.featured{background:var(--dark);color:var(--cream)}
+  .plan.featured .tag{color:var(--sand)}
+  .plan.featured .desc{color:var(--cream);opacity:.78;border-top-color:var(--line)}
+  .plan.featured .per{color:var(--sand)}
+  .plan.featured .price sub{color:var(--sand)}
+  .plan.featured::after{content:"RECOMENDADO";position:absolute;top:16px;right:16px;font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--sand)}
+
+  .pricing-foot{margin-top:48px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .pricing-foot .fine{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:#8a7a5e;text-transform:uppercase;max-width:56ch}
+
+  /* ——— process — horizontal timeline with big numerals ——— */
+  .process{background:var(--cream)}
+  .process .rail{padding:160px 0}
+  .process-head{margin-bottom:100px;max-width:720px}
+  .process-head .h-section{margin-top:24px}
+  .process-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:0;border-top:1px solid var(--line-dark)}
+  .step{
+    padding:40px 32px 48px 0;border-right:1px solid var(--line-dark);
+    display:flex;flex-direction:column;gap:20px;position:relative;
+  }
+  .step:last-child{border-right:0}
+  .step:not(:first-child){padding-left:32px}
+  .step .big{
+    font-family:var(--display);font-weight:600;font-size:96px;line-height:1;letter-spacing:-.03em;
+    color:var(--dark);opacity:.12;margin-top:-20px;
+  }
+  .step .title{font-family:var(--display);font-weight:500;font-size:22px;text-transform:uppercase;line-height:1.1;letter-spacing:-.005em}
+  .step .desc{font-size:13.5px;line-height:1.65;color:#3a4a4c;font-weight:300;max-width:26ch}
+  .process-foot{margin-top:80px;padding-top:32px;border-top:1px solid var(--line-dark);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:#8a7a5e;text-transform:uppercase}
+
+  /* ——— trust pillars ——— */
+  .trust{background:var(--dark);color:var(--cream)}
+  .trust .rail{padding:160px 0}
+  .trust-head{margin-bottom:100px;max-width:720px}
+  .trust-head .h-section{margin-top:24px;color:var(--cream)}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+  .pillar{
+    padding:40px 32px 0 0;border-right:1px solid var(--line);
+    display:flex;flex-direction:column;gap:24px;min-height:260px;
+  }
+  .pillar:last-child{border-right:0}
+  .pillar:not(:first-child){padding-left:32px}
+  .pillar .icon{width:32px;height:32px;color:var(--sand)}
+  .pillar .title{font-family:var(--display);font-weight:500;font-size:20px;text-transform:uppercase;line-height:1.1;letter-spacing:-.005em}
+  .pillar .body{font-size:13.5px;line-height:1.65;color:var(--cream);opacity:.72;font-weight:300;max-width:26ch}
+
+  /* ——— final CTA — full-bleed dark with giant type ——— */
+  .final{position:relative;background:var(--dark);color:var(--cream);min-height:80vh;overflow:hidden;display:flex;align-items:center}
+  .final .bg{position:absolute;inset:0;z-index:0;opacity:.55}
+  .final .bg .ph{width:100%;height:100%;
+    background:
+      repeating-linear-gradient(135deg, rgba(200,184,154,.1) 0 2px, transparent 2px 16px),
+      radial-gradient(ellipse at 70% 60%, #3a3226 0%, #1C2B2D 60%, #11191b 100%);
+  }
+  .final .over{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(17,25,27,.6), rgba(17,25,27,.9))}
+  .final .inner{position:relative;z-index:2;width:100%;max-width:var(--max);margin:0 auto;padding:140px 48px;display:grid;grid-template-columns:160px 1fr;gap:64px}
+  .final .inner .idx{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--sand);padding-top:6px}
+  .final .inner .main .eyebrow{margin-bottom:36px;display:block}
+  .final .inner .main .h-display{max-width:18ch}
+  .final .inner .main .h-display em{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--sand);text-transform:none;letter-spacing:0}
+  .final .inner .main .ctas{margin-top:56px;display:flex;gap:10px;flex-wrap:wrap}
+  .final .inner .main .meta{margin-top:72px;display:grid;grid-template-columns:repeat(3,auto);gap:56px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--sand);text-transform:uppercase}
+
+  /* ——— footer ——— */
+  footer.site{background:var(--dark-2);color:var(--cream);border-top:1px solid var(--line)}
+  footer.site .top{
+    max-width:var(--max);margin:0 auto;padding:100px 48px 60px;
+    display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;
+  }
+  footer.site .brand{font-family:var(--display);font-weight:700;font-size:26px;text-transform:uppercase;letter-spacing:.01em;line-height:1}
+  footer.site .brand sup{font-family:var(--serif);font-style:italic;font-weight:300;font-size:12px;margin-left:8px;color:var(--sand);letter-spacing:0;text-transform:none;vertical-align:top}
+  footer.site .descr{font-size:13.5px;line-height:1.7;color:var(--cream);opacity:.7;margin-top:24px;max-width:42ch;font-weight:300}
+  footer.site .subscribe{margin-top:32px;display:flex;max-width:380px;border:1px solid var(--line)}
+  footer.site .subscribe input{flex:1;background:transparent;border:0;color:var(--cream);padding:0 16px;font-family:var(--sans);font-size:13px;font-weight:300;outline:none}
+  footer.site .subscribe input::placeholder{color:var(--cream);opacity:.5}
+  footer.site .subscribe button{padding:14px 20px;background:var(--sand);color:var(--dark);font-family:var(--sans);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;border-left:1px solid var(--line)}
+  footer.site .col h4{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--sand);margin-bottom:24px;font-weight:400}
+  footer.site .col a, footer.site .col p{display:block;font-size:13.5px;line-height:2;color:var(--cream);opacity:.82;font-weight:300}
+  footer.site .col a:hover{opacity:1}
+  footer.site .mega{
+    max-width:var(--max);margin:0 auto;padding:0 48px 40px;
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(80px, 15vw, 240px);line-height:.9;letter-spacing:-.03em;text-transform:uppercase;color:var(--cream);opacity:.06;
+    pointer-events:none;user-select:none;white-space:nowrap;overflow:hidden;
+  }
+  footer.site .legal{
+    max-width:var(--max);margin:0 auto;padding:32px 48px;
+    border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--cream);opacity:.5;text-transform:uppercase;
+  }
+
+  /* ——— responsive ——— */
+  @media (max-width:1100px){
+    .rail{grid-template-columns:1fr;gap:40px;padding:100px 0}
+    .rail .idx{padding-top:0}
+    .feature{grid-template-columns:1fr}
+    .feature .copyside{padding:80px 40px}
+    .plans{grid-template-columns:1fr}
+    .plan{border-right:0;border-bottom:1px solid var(--line-dark)}
+    .plan:last-child{border-bottom:0}
+    .process-grid{grid-template-columns:repeat(2,1fr)}
+    .step{border-right:0;border-bottom:1px solid var(--line-dark);padding:40px 0 32px}
+    .step:not(:first-child){padding-left:0}
+    .step:nth-child(odd){padding-right:24px;border-right:1px solid var(--line-dark)}
+    .trust-grid{grid-template-columns:repeat(2,1fr)}
+    .pillar{border-right:0;border-bottom:1px solid var(--line);padding:40px 0}
+    .pillar:nth-child(odd){padding-right:24px;border-right:1px solid var(--line)}
+    .pillar:not(:first-child){padding-left:0}
+    footer.site .top{grid-template-columns:1fr 1fr;gap:48px}
+    .final .inner{grid-template-columns:1fr;padding:100px 40px}
+    .svc-row{grid-template-columns:60px 1fr;gap:16px}
+    .svc-row .desc, .svc-row .tag{grid-column:2;text-align:left}
+  }
+  @media (max-width:720px){
+    .wrap, footer.site .top, footer.site .legal{padding-left:24px;padding-right:24px}
+    .hero-top, .hero-main, .hero-foot{padding-left:24px;padding-right:24px}
+    .topbar{padding:14px 20px;grid-template-columns:auto 1fr;gap:16px}
+    .topbar .left, .topbar .right .hide-sm{display:none}
+    .topbar .mark{justify-self:start}
+    .hero{min-height:auto}
+    .hero-top, .hero-main, .hero-foot{padding-left:24px;padding-right:24px}
+    .hero-top{padding-top:100px}
+    .hero-foot{grid-template-columns:1fr;margin-top:48px;padding-top:32px}
+    .hero-foot .ctas{justify-self:start}
+    .services-head, .services-foot, .pricing-foot, .process-foot{flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ TOP BAR ═══════════════ -->
+<nav class="topbar" id="topbar">
+  <div class="left">
+    <span>ES / EN</span>
+    <a href="#servicios">Servicios</a>
+    <a href="#tarifas">Tarifas</a>
+  </div>
+  <a href="#" class="mark">Neural Global<sup>Consulting Group</sup><small>Sexología · Salud Mental</small></a>
+  <div class="right">
+    <a href="#contacto" class="hide-sm">Contacto</a>
+    <a href="#agendar" class="pill"><span class="dot"></span>Agendar cita</a>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="images/dr-antonello.jpg" id="hero-video">
+    <source src="uploads/video-3-compressed.mp4" type="video/mp4"/>
+  </video>
+  <div class="hero-poster"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-hairlines"></div>
+
+  <div class="hero-top">
+    <div>
+      <span class="eyebrow">Escazú · San José, Costa Rica</span>
+      <div class="num" style="margin-top:10px">— Colegiados CPPCR · Atención privada</div>
+    </div>
+    <div class="meta">
+      <span>Sexología clínica</span>
+      <span>Salud mental</span>
+      <span>Presencial · Online</span>
+    </div>
+  </div>
+
+  <div class="hero-main">
+    <h1 class="h-mega">
+      Un espacio<br/>
+      <em>para</em> cuidar<br/>
+      lo que importa.
+    </h1>
+  </div>
+
+  <div class="hero-foot">
+    <div class="col">
+      <h4>— Dr. Antonello</h4>
+      <p>Sexólogo clínico. Práctica privada especializada en sexología y salud mental, con sede en Escazú y atención en línea para consultantes en el extranjero.</p>
+    </div>
+    <div class="col">
+      <h4>— Disponibilidad</h4>
+      <p>Lun – Vie · 09:00 – 19:00<br/>Sábados con cita previa.<br/>Respuesta el mismo día hábil.</p>
+    </div>
+    <div class="ctas">
+      <a href="#agendar" class="btn btn-solid-cream">Agendar cita <span>→</span></a>
+      <a href="#whatsapp" class="btn btn-ghost-cream">WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ TICKER ═══════════════ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Sexología Clínica <span class="sep">/</span> Salud Mental <span class="sep">/</span> Terapia de Pareja <span class="sep">/</span> Atención Online <span class="sep">/</span> Confidencialidad <span class="sep">/</span> <em>Espacio seguro</em> <span class="sep">/</span> Escazú · Costa Rica <span class="sep">/</span></span>
+    <span>Sexología Clínica <span class="sep">/</span> Salud Mental <span class="sep">/</span> Terapia de Pareja <span class="sep">/</span> Atención Online <span class="sep">/</span> Confidencialidad <span class="sep">/</span> <em>Espacio seguro</em> <span class="sep">/</span> Escazú · Costa Rica <span class="sep">/</span></span>
+  </div>
+</div>
+
+<!-- ═══════════════ MANIFESTO ═══════════════ -->
+<section class="manifesto">
+  <div class="wrap">
+    <div class="rail">
+      <div class="idx"><span class="dash"></span>01 / Manifiesto</div>
+      <div>
+        <span class="eyebrow on-light">Nuestro enfoque</span>
+        <h2 class="h-section" style="margin-top:32px">La sexualidad y el bienestar emocional merecen un espacio <em class="italic-label" style="font-size:.9em">serio y humano.</em></h2>
+        <p class="lede">Creemos en una práctica clínica basada en evidencia, libre de prejuicio y sostenida por el tiempo que cada proceso necesita. Acompañamos a quienes deciden mirar hacia dentro con rigor, discreción y calidez profesional.</p>
+        <div class="signature">
+          <span class="italic-label">— Dr. Antonello, Neural Global</span>
+          <span class="line"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICES — INDEX ═══════════════ -->
+<section class="services" id="servicios">
+  <div class="wrap">
+    <div class="rail">
+      <div class="idx"><span class="dash"></span>02 / Servicios</div>
+      <div>
+        <div class="services-head">
+          <h2 class="h-section">Cuatro áreas<br/>de práctica.</h2>
+          <div class="meta">ES / EN<br/>Presencial · Online<br/>04 Servicios</div>
+        </div>
+
+        <div class="svc-index">
+          <a class="svc-row" href="#">
+            <span class="num-big">N° 01</span>
+            <span class="name">Sexología<br/>General</span>
+            <span class="desc">Evaluación y tratamiento de dificultades sexuales en adultos desde una perspectiva clínica integrativa y basada en evidencia.</span>
+            <span class="tag">Adultos</span>
+            <span class="ar">→</span>
+          </a>
+          <a class="svc-row" href="#">
+            <span class="num-big">N° 02</span>
+            <span class="name">Salud<br/>Mental</span>
+            <span class="desc">Ansiedad, duelo, autoestima y procesos vitales. Psicoterapia individual con enfoque contextual y contemporáneo.</span>
+            <span class="tag">Individual</span>
+            <span class="ar">→</span>
+          </a>
+          <a class="svc-row" href="#">
+            <span class="num-big">N° 03</span>
+            <span class="name">Terapia<br/>de Pareja</span>
+            <span class="desc">Acompañamiento a vínculos en transición, conflicto o reconstrucción. Sesiones conjuntas e individuales complementarias.</span>
+            <span class="tag">Parejas</span>
+            <span class="ar">→</span>
+          </a>
+          <a class="svc-row" href="#">
+            <span class="num-big">N° 04</span>
+            <span class="name">Atención<br/>Online</span>
+            <span class="desc">Sesiones por videollamada cifrada para pacientes fuera del área metropolitana o en el extranjero. Zona horaria CST.</span>
+            <span class="tag">Internacional</span>
+            <span class="ar">→</span>
+          </a>
+        </div>
+
+        <div class="services-foot">
+          <span class="fine">— Todas las sesiones tienen una duración de 50 min.</span>
+          <a href="#" class="arrow-link">Ver todos los servicios <span class="ar">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FEATURE STRIP ═══════════════ -->
+<section class="feature">
+  <div class="imgside">
+    <img src="images/dr-antonello.jpg" alt="Dr. Antonello" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;filter:grayscale(.1) contrast(1.02)"/>
+    <span class="corner">Fig. 01 / Dr. Antonello</span>
+    <span class="phcap">Dr. Antonello<em>Sexólogo clínico · Colegiado CPPCR</em></span>
+  </div>
+  <div class="copyside">
+    <span class="eyebrow on-light">El consultorio</span>
+    <h2 class="h-section">Un lugar diseñado para hablar despacio.</h2>
+    <p class="lede">El consultorio en Escazú está pensado como un espacio de pausa: acústicamente aislado, con luz natural y una estética doméstica antes que clínica. Todo, desde el mobiliario hasta el tiempo entre sesiones, está orientado a proteger la conversación.</p>
+    <a href="#" class="arrow-link">Conocer el espacio <span class="ar">→</span></a>
+  </div>
+</section>
+
+<!-- ═══════════════ PRICING ═══════════════ -->
+<section class="pricing" id="tarifas">
+  <div class="wrap">
+    <div class="rail">
+      <div class="idx"><span class="dash"></span>03 / Tarifas</div>
+      <div>
+        <div class="pricing-head">
+          <span class="eyebrow on-light">Planes de acompañamiento</span>
+          <h2 class="h-section">Tres modalidades, un mismo estándar clínico.</h2>
+          <p class="lede">Sesiones de 50 minutos, presenciales en Escazú o por videollamada. Los planes por ciclo están pensados para sostener un proceso en el tiempo con un ritmo sostenible.</p>
+        </div>
+
+        <div class="plans">
+          <article class="plan">
+            <span class="tag">— N° 01</span>
+            <h3 class="name">Sesión<br/>individual</h3>
+            <p class="desc">Consulta única de 50 minutos, presencial u online. Ideal para una primera evaluación o consulta puntual.</p>
+            <div class="price">$95<sub>USD</sub></div>
+            <div class="per">Por sesión · sin compromiso</div>
+          </article>
+
+          <article class="plan featured">
+            <span class="tag">— N° 02</span>
+            <h3 class="name">Ciclo de<br/>seguimiento</h3>
+            <p class="desc">Cuatro encuentros quincenales o semanales según criterio clínico. Incluye plan de trabajo y revisión intermedia.</p>
+            <div class="price">$420<sub>USD</sub></div>
+            <div class="per">4 sesiones · ahorro 10%</div>
+          </article>
+
+          <article class="plan">
+            <span class="tag">— N° 03</span>
+            <h3 class="name">Proceso<br/>extendido</h3>
+            <p class="desc">Programa trimestral con revisiones periódicas, informe final y seguimiento intersesión por mensajería cifrada.</p>
+            <div class="price">$780<sub>USD</sub></div>
+            <div class="per">8 sesiones · ahorro 18%</div>
+          </article>
+        </div>
+
+        <div class="pricing-foot">
+          <span class="fine">— Precios en USD · Colones al T.C. BCCR · Sinpe Móvil, tarjeta y transferencia · Facturación electrónica</span>
+          <a href="#agendar" class="btn btn-solid-dark">Agendar primera cita <span>→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PROCESS ═══════════════ -->
+<section class="process">
+  <div class="wrap">
+    <div class="rail">
+      <div class="idx"><span class="dash"></span>04 / Proceso</div>
+      <div>
+        <div class="process-head">
+          <span class="eyebrow on-light">Cómo trabajamos</span>
+          <h2 class="h-section">Cuatro pasos<br/>para empezar.</h2>
+        </div>
+
+        <div class="process-grid">
+          <div class="step">
+            <div class="big">01</div>
+            <h3 class="title">Primer<br/>contacto</h3>
+            <p class="desc">WhatsApp o formulario. Respondemos el mismo día hábil con disponibilidad concreta.</p>
+          </div>
+          <div class="step">
+            <div class="big">02</div>
+            <h3 class="title">Evaluación<br/>inicial</h3>
+            <p class="desc">Una sesión de 50 min para comprender el motivo de consulta y acordar objetivos.</p>
+          </div>
+          <div class="step">
+            <div class="big">03</div>
+            <h3 class="title">Plan de<br/>trabajo</h3>
+            <p class="desc">Propuesta clara: frecuencia, duración estimada y modalidad (presencial u online).</p>
+          </div>
+          <div class="step">
+            <div class="big">04</div>
+            <h3 class="title">Acompaña-<br/>miento</h3>
+            <p class="desc">Sesiones regulares con revisiones periódicas. El alta se consensúa siempre.</p>
+          </div>
+        </div>
+
+        <div class="process-foot">
+          <span>— Sesiones con cita previa</span>
+          <span>— Presencial y online</span>
+          <span>— Espacio confidencial</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TRUST ═══════════════ -->
+<section class="trust">
+  <div class="wrap">
+    <div class="rail">
+      <div class="idx"><span class="dash"></span>05 / Compromisos</div>
+      <div>
+        <div class="trust-head">
+          <span class="eyebrow">Principios</span>
+          <h2 class="h-section">Cuatro principios<br/>que sostienen cada sesión.</h2>
+        </div>
+
+        <div class="trust-grid">
+          <div class="pillar">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square">
+              <rect x="5" y="10" width="14" height="10"/>
+              <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+            </svg>
+            <h3 class="title">Confidencialidad</h3>
+            <p class="body">Secreto profesional estricto. Registros cifrados y acceso restringido al equipo clínico tratante.</p>
+          </div>
+          <div class="pillar">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square">
+              <path d="M7 13V6a1.5 1.5 0 0 1 3 0v5"/>
+              <path d="M10 11V4.5a1.5 1.5 0 0 1 3 0V11"/>
+              <path d="M13 11V5.5a1.5 1.5 0 0 1 3 0V12"/>
+              <path d="M16 12V7.5a1.5 1.5 0 0 1 3 0V16a5 5 0 0 1-5 5h-3a5 5 0 0 1-5-5v-4l-1.5-1.5a1.5 1.5 0 0 1 2-2.2L7 13"/>
+            </svg>
+            <h3 class="title">Trato humano</h3>
+            <p class="body">Escucha sin juicio. Un espacio para hablar de aquello que habitualmente no se habla.</p>
+          </div>
+          <div class="pillar">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square">
+              <rect x="4" y="4" width="16" height="16"/>
+              <path d="M8 10h8M8 13h8M8 16h5"/>
+            </svg>
+            <h3 class="title">Formación clínica</h3>
+            <p class="body">Profesionales con formación universitaria y especialización continua en sexología y salud mental.</p>
+          </div>
+          <div class="pillar">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square">
+              <path d="M4 5h16v11H9l-5 4z"/>
+            </svg>
+            <h3 class="title">Diálogo abierto</h3>
+            <p class="body">Consulta previa sin costo para resolver dudas antes de iniciar cualquier proceso terapéutico.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FINAL CTA ═══════════════ -->
+<section class="final" id="agendar">
+  <div class="bg"><div class="ph"></div></div>
+  <div class="over"></div>
+  <div class="inner">
+    <div class="idx"><span class="dash" style="display:inline-block;width:18px;height:1px;background:var(--sand);vertical-align:middle;margin-right:10px;transform:translateY(-3px)"></span>06 / Agendar</div>
+    <div class="main">
+      <span class="eyebrow">Primera cita</span>
+      <h2 class="h-display">Dar el primer paso <em>también es</em> parte del cuidado.</h2>
+      <div class="ctas">
+        <a href="#" class="btn btn-solid-cream">Agendar cita <span>→</span></a>
+        <a href="#whatsapp" class="btn btn-ghost-cream">WhatsApp</a>
+      </div>
+      <div class="meta">
+        <span>— Escazú, Costa Rica</span>
+        <span>— Presencial · Online</span>
+        <span>— Respuesta mismo día</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site" id="contacto">
+  <div class="top">
+    <div>
+      <div class="brand">Neural Global<sup>Consulting Group</sup></div>
+      <p class="descr">Práctica clínica privada dedicada a la sexología y la salud mental. Escazú, Costa Rica — y atención en línea para consultantes en el extranjero.</p>
+      <form class="subscribe" onsubmit="event.preventDefault()">
+        <input type="email" placeholder="Tu correo electrónico" aria-label="Email"/>
+        <button type="submit">Suscribir →</button>
+      </form>
+    </div>
+    <div class="col">
+      <h4>— Navegación</h4>
+      <a href="#servicios">Servicios</a>
+      <a href="#tarifas">Tarifas</a>
+      <a href="#">Proceso</a>
+      <a href="#">El equipo</a>
+      <a href="#">Recursos</a>
+    </div>
+    <div class="col">
+      <h4>— Contacto</h4>
+      <p>Guachipelín, Escazú<br/>San José, Costa Rica<br/>A 200 m N de Plaza Itskatzú</p>
+      <p>WhatsApp · +506 8888 0000<br/>hola@neuralglobal.cr</p>
+      <p>Pago: USD · Colones (T.C. BCCR)<br/>Sinpe Móvil · Tarjeta · Transferencia</p>
+    </div>
+    <div class="col">
+      <h4>— Horario</h4>
+      <p>Lun – Vie<br/>09:00 – 19:00</p>
+      <p>Sábado<br/>con cita previa</p>
+      <p style="margin-top:18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--sand);text-transform:uppercase;opacity:.9">— Afiliados CPPCR<br/>— Facturación electrónica<br/>— Primera consulta sin costo</p>
+    </div>
+  </div>
+  <div class="mega">Neural · Global · Consulting</div>
+  <div class="legal">
+    <span>© 2026 Neural Global Consulting Group · Colegiados CPPCR N° XXXX</span>
+    <span>Aviso legal · Privacidad · Código deontológico</span>
+  </div>
+</footer>
+
+<!-- ═══════════════ FLOATING WHATSAPP ═══════════════ -->
+<a href="https://wa.me/50688880000" class="wa-float" id="wa-float" target="_blank" rel="noopener">
+  <span class="wa-dot"></span>WhatsApp · +506 8888 0000
+</a>
+
+<script>
+  const nav = document.getElementById('topbar');
+  const onScroll = () => {
+    if (window.scrollY > 40) nav.classList.add('solid');
+    else nav.classList.remove('solid');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+
+</body>
+</html>
