@@ -341,6 +341,31 @@
   .feature .copyside .lede{max-width:46ch;color:#3a4a4c}
   .feature .copyside .arrow-link{color:var(--dark);align-self:flex-start}
 
+  /* reversed: copy left, image right */
+  .feature.rev{grid-template-columns:1fr 1.15fr}
+  .feature.rev .copyside{order:-1}
+  .feature.rev .imgside{order:0}
+
+  /* Dr. portrait */
+  .feature .imgside .dr-ph{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center top;
+    filter:grayscale(.12) contrast(1.04) brightness(.92);
+  }
+  /* credential block inside copyside */
+  .feature .copyside .cred{
+    display:flex;flex-direction:column;gap:4px;
+    border-top:1px solid var(--line-dark);padding-top:20px;
+  }
+  .feature .copyside .cred-name{
+    font-family:var(--display);font-weight:300;font-variation-settings:"opsz" 72;
+    font-size:26px;letter-spacing:-.01em;line-height:1.05;
+  }
+  .feature .copyside .cred-title{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--sand);margin-top:8px;
+  }
+
   /* ——— pricing ——— */
   .pricing{background:var(--cream-2)}
   .pricing .rail{padding:160px 0}
@@ -653,6 +678,24 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════ DR. ANTONELLO — PRESENTACIÓN ═══════════════ -->
+<section class="feature rev">
+  <div class="copyside">
+    <span class="eyebrow on-light">El profesional</span>
+    <h2 class="h-section">Una práctica construida<br/>con rigor y<br/><em class="italic-label" style="font-size:.9em">sin atajos.</em></h2>
+    <p class="lede">Sexólogo clínico con formación en salud mental, especializado en el abordaje de la sexualidad humana desde una perspectiva integrativa y basada en evidencia. Cada proceso es individual; cada conversación, confidencial.</p>
+    <div class="cred">
+      <span class="cred-name">Dr. Antonello</span>
+      <span class="cred-title">Sexólogo clínico · Colegiado CPPCR<br/>Práctica privada · Escazú, Costa Rica</span>
+    </div>
+  </div>
+  <div class="imgside">
+    <img class="dr-ph" src="images/dr-antonello.jpg" alt="Dr. Antonello — Sexólogo clínico, Neural Global"/>
+    <span class="corner">Fig. 02 / Dr. Antonello</span>
+    <span class="phcap">Sexólogo clínico · Neural Global<em>Colegiado CPPCR · Escazú, San José</em></span>
   </div>
 </section>
 
